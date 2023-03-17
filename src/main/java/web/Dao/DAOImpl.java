@@ -1,4 +1,5 @@
-package web.Dao;
+
+package web.dao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,20 +12,14 @@ import java.util.List;
 
 @Component
 @Transactional(readOnly = true)
-public class DAOImpl implements DAO{
+public class DAOImpl implements DAO {
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public List<Users> getAllUsers() {
         return entityManager.createQuery("select u from Users u", Users.class).getResultList();
-    }
-
-    @Override
-    public Users getUserId(long id) {
-        TypedQuery<Users> query = entityManager.createQuery("select u from Users u where u.id =:users_id", Users.class);
-        query.setParameter("users_id", id);
-        return query.getResultList().stream().findAny().orElse(null);
     }
 
     @Override
@@ -42,5 +37,12 @@ public class DAOImpl implements DAO{
         Users users = entityManager.find(Users.class, id);
         entityManager.remove(users);
         return users;
+    }
+
+    @Override
+    public Users getUserId(long id) {
+        TypedQuery<Users> query = entityManager.createQuery("select u from Users u where u.id =:users_id", Users.class);
+        query.setParameter("users_id", id);
+        return query.getResultList().stream().findAny().orElse(null);
     }
 }
