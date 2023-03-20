@@ -11,7 +11,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     private final UsersService userService;
-    @Autowired
+
     public UserController(UsersService userService) {
         this.userService = userService;
     }

@@ -2,6 +2,7 @@
 package web.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.Users;
 
@@ -10,8 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Component
-@Transactional(readOnly = true)
+@Repository
 public class DAOImpl implements DAO {
 
     @PersistenceContext
